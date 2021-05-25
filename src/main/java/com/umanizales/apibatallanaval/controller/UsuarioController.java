@@ -29,4 +29,10 @@ public class UsuarioController {
         return usuarioService.create(usuario);
     }
 
+    @GetMapping(path = "{codeRol}")
+    public @ResponseBody ResponseEntity<Object> findUsersByCodeRol(@PathVariable("codeRol") short codeRol)
+    {
+        return usuarioService.findUsersByRol(codeRol);
+    }
+
 }

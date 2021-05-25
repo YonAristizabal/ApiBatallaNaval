@@ -3,7 +3,7 @@ package com.umanizales.apibatallanaval.model.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "tipo_usuario", schema = "public", catalog = "batalla_naval")
+@Table(name = "tipo_usuario", schema = "public", catalog = "paseo_perros")
 public class TipoUsuario {
     private short codigo;
     private String descripcion;
