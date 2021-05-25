@@ -28,14 +28,25 @@ public class BarcoService {
     {
         try
         {
-            Barco barcoGuardado= barcoRepository.save(barco);
-            return new ResponseEntity<>(new RespuestaDTO("Exitoso",
-                    barcoGuardado,null), HttpStatus.OK);
+            //Consultar si ya existe un barco con ese número de casilla
+            Barco barcoConsulta = barcoRepository.encontrarBarcoPorNumeroCasillas(barco.getNumeroCasillas());
+            if(barcoConsulta==null)
+            {
+                Barco barcoGuardado= barcoRepository.save(barco);
+                return new ResponseEntity<>(new RespuestaDTO("Exitoso",
+                        barcoGuardado,null), HttpStatus.OK);
+            }
+            else
+            {
+                return new ResponseEntity<>(new RespuestaDTO("Error",
+                        null,"Ya existe un barco con ese número de casillas"),
+                        HttpStatus.CONFLICT);
+            }
         }
         catch(Exception ex)
         {
             return new ResponseEntity<>(new RespuestaDTO("Error",
-                    null,"Ocurrió un error almacenando el usuario"),
+                    null,"Ocurrió un error almacenando el Barco"),
                     HttpStatus.CONFLICT);
         }
     }
