@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class BarcoService {
     private BarcoRepository barcoRepository;
-
     @Autowired
     public BarcoService(BarcoRepository barcoRepository) {
         this.barcoRepository = barcoRepository;
