@@ -14,4 +14,14 @@ public class CoordenadaDTO implements Serializable {
     private int y;
     private Boolean estado;
 
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof CoordenadaDTO){
+            CoordenadaDTO objDTO= (CoordenadaDTO) obj;
+            if (this.x == objDTO.getX() && this.y == objDTO.getY()){
+                return true;
+            }
+        }
+        return false;
+    }
 }

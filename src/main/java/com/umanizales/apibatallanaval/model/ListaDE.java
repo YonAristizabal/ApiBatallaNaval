@@ -1,5 +1,7 @@
 package com.umanizales.apibatallanaval.model;
 
+import com.umanizales.apibatallanaval.model.dto.CoordenadaDTO;
+import com.umanizales.apibatallanaval.model.dto.DistribucionBarcoDTO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -45,5 +47,34 @@ public class ListaDE implements Serializable {
 
     public List<Object> listarDatos(){
         return null;
+    }
+
+
+    public ListaDE clonarlist(){
+        ListaDE listaCopia = new ListaDE();
+        NodoDE temp = cabeza;
+
+        while (temp != null){
+
+            listaCopia.adicionarNodo(temp);
+            temp= temp.getSiguiente();
+
+        }
+        return listaCopia;
+    }
+
+    public boolean validarExistenciaCoordenadas(CoordenadaDTO[] coordenas){
+        NodoDE temp = cabeza;
+        if (cabeza != null){
+            while (temp != null){
+                for (CoordenadaDTO coord: coordenas){
+                if (((DistribucionBarcoDTO)temp.getDato()).validarExistenciaCoordenada(coord)){
+                    return true;
+                    }
+                }
+                temp= temp.getSiguiente();
+            }
+        }
+        return false;
     }
 }
