@@ -8,6 +8,7 @@ import javax.persistence.*;
 public class TipoUsuario {
     private short codigo;
     private String descripcion;
+    public static  final short TIPO_ADMINISTRADOR = 1;
 
     @Id
     @Column(name = "codigo", nullable = false)

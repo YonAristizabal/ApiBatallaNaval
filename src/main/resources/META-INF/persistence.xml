@@ -7,6 +7,8 @@
         <class>com.umanizales.apibatallanaval.model.entities.TipoUsuario</class>
         <class>com.umanizales.apibatallanaval.model.entities.Usuario</class>
         <class>com.umanizales.apibatallanaval.model.entities.Barco</class>
+        <class>com.umanizales.apibatallanaval.model.entities.Tablero</class>
+        <class>com.umanizales.apibatallanaval.model.entities.Juego</class>
 
         <properties>
             <property name="javax.persistence.schema-generation.database.action" value="none"/>

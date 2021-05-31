@@ -49,7 +49,7 @@ public class ListaDE implements Serializable {
         return null;
     }
 
-
+    //Permite clonar la listaDE para que se diferente tanto para el Jugador 1, como para el Jugador 2
     public ListaDE clonarlist(){
         ListaDE listaCopia = new ListaDE();
         NodoDE temp = cabeza;
