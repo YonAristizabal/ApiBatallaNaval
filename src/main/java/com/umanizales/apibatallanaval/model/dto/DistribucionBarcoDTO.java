@@ -22,6 +22,8 @@ public class DistribucionBarcoDTO implements Serializable {
 
     }
 
+
+    //Se inicializan las casillas con unas coordenas x,y
     public void definirUbicacion(int x, int y, byte orientacion) {
         this.casillas = new CoordenadaDTO[barco.getNumeroCasillas()];
 
@@ -35,11 +37,12 @@ public class DistribucionBarcoDTO implements Serializable {
             }
         }
     }
-
+    //Metodo para recibir las coordenas que van a quedar definidas
     public void definirUbicacion(CoordenadaDTO[] coordenadas){
         this.casillas= coordenadas;
     }
 
+    //Para saber si cuenta con la coordenada
     public boolean validarExistenciaCoordenada(CoordenadaDTO coordenada) {
         if (casillas != null) {
             for (CoordenadaDTO coord : casillas) {
@@ -52,6 +55,7 @@ public class DistribucionBarcoDTO implements Serializable {
     }
 
 
+    //Este metodo sirve para garantizar que los barcos no se vayan a anteponer en ninguna posición
     public CoordenadaDTO[] sugerirUbicacion(int x, int y, byte orientacion) {
         CoordenadaDTO[] casillasSugeridas = new CoordenadaDTO[barco.getNumeroCasillas()];
 

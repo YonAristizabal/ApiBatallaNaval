@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
+//Clase para implementar el servicio del Barco
 public class BarcoService {
     private BarcoRepository barcoRepository;
     @Autowired

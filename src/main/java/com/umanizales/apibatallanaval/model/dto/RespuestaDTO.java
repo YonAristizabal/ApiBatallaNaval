@@ -10,6 +10,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @AllArgsConstructor
+//Clase para dar una respuesta
 public class RespuestaDTO implements Serializable {
     private String message;
     private Object data;

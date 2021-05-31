@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "listabarcos")
+//Clase que controlara la listaDE de la ubicación de los barcos
 public class ListaDEController {
     private ListaDEService listaDEService;
     @Autowired

@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
+//Clase que controla los servicios de los usuarios
 public class UsuarioService {
     private UsuarioRepository usuarioRepository;
     @Autowired

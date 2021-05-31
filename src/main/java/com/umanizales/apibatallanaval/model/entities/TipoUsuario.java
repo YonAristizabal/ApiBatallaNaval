@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "tipo_usuario", schema = "public", catalog = "paseo_perros")
+//Clase que permite gestionar los tipos de usuario, 1 - Administrador, 2 - Jugador
 public class TipoUsuario {
     private short codigo;
     private String descripcion;

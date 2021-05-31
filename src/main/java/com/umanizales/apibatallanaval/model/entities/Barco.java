@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "barco", schema = "public", catalog = "batalla_naval")
+//Clase que permite la gestión de un Barco
 public class Barco {
     private int id;
     private String nombre;

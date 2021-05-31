@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+//Clase para implementar el servicio de la ListaDE
 public class ListaDEService {
     private ListaDE listaBarcos;
 

@@ -63,6 +63,7 @@ public class ListaDE implements Serializable {
         return listaCopia;
     }
 
+    //Permite validar la existencia de un listado de coordenas
     public boolean validarExistenciaCoordenadas(CoordenadaDTO[] coordenas){
         NodoDE temp = cabeza;
         if (cabeza != null){
