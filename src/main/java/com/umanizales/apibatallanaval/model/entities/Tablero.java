@@ -37,5 +37,16 @@ public class Tablero {
     public void setCreadoPor(int creadoPor){
         this.creadoPor = creadoPor;
     }
-
+    public int getCols() {
+        return cols;
+    }
+    public void setCols(int cols) {
+        this.cols = cols;
+    }
+    public int getFilas() {
+        return filas;
+    }
+    public void setFilas(int filas) {
+        this.filas = filas;
+    }
 }

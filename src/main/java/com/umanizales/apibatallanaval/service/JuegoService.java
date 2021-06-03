@@ -6,6 +6,7 @@ import com.umanizales.apibatallanaval.model.entities.TipoUsuario;
 import com.umanizales.apibatallanaval.model.entities.Usuario;
 import com.umanizales.apibatallanaval.repository.JuegoRepository;
 import com.umanizales.apibatallanaval.repository.UsuarioRepository;
+import com.umanizales.apibatallanaval.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,18 +28,18 @@ public class JuegoService {
             Usuario usuario = this.usuarioRepository.obtenerUsuariosPorCorreoRol(juego.getCreadoPor(), TipoUsuario.TIPO_ADMINISTRADOR);
             if(usuario != null){
                 juegoRepository.save(juego);
-                return new ResponseEntity<>(new RespuestaDTO("Exitoso",
+                return new ResponseEntity<>(new RespuestaDTO(Constants.SUCCESSFUL,
                         juego,null), HttpStatus.OK);
             }else{
-                return new ResponseEntity<>(new RespuestaDTO("Error",
-                        null,"El usuario no es de tipo administrador"),
+                return new ResponseEntity<>(new RespuestaDTO(Constants.ERROR,
+                        null,Constants.ERROR_USER_TYPE),
                         HttpStatus.UNAUTHORIZED);
             }
         }
         catch(Exception ex)
         {
-            return new ResponseEntity<>(new RespuestaDTO("Error",
-                    null,"Ocurrió un error almacenando el juego"),
+            return new ResponseEntity<>(new RespuestaDTO(Constants.ERROR,
+                    null,Constants.ERROR_SAVE_GAME),
                     HttpStatus.CONFLICT);
         }
     }

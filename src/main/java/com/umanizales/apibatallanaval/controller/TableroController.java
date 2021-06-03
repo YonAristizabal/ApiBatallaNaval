@@ -24,4 +24,12 @@ public class TableroController {
         tablero.setJuegoId(juegoId);
         return tableroService.create(tablero);
     }
+
+    @PostMapping(path = "iniciar_tablero")
+    public @ResponseBody  ResponseEntity<Object> iniciarTablero(@RequestBody Tablero tablero)
+    {
+        return tableroService.inicializarTablero(tablero.getFilas(), tablero.getCols());
+    }
+
+
 }

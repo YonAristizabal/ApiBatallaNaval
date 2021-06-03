@@ -3,6 +3,7 @@ package com.umanizales.apibatallanaval.service;
 import com.umanizales.apibatallanaval.model.dto.RespuestaDTO;
 import com.umanizales.apibatallanaval.model.entities.Barco;
 import com.umanizales.apibatallanaval.repository.BarcoRepository;
+import com.umanizales.apibatallanaval.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ public class BarcoService {
     }
 
     public ResponseEntity<Object> findAll() {
-        return new ResponseEntity<>(new RespuestaDTO("Exitoso",
+        return new ResponseEntity<>(new RespuestaDTO(Constants.SUCCESSFUL,
                 barcoRepository.findAll(), null), HttpStatus.OK);
     }
 
@@ -29,16 +30,16 @@ public class BarcoService {
             Barco barcoConsulta = barcoRepository.encontrarBarcoPorNumeroCasillas(barco.getNumeroCasillas());
             if (barcoConsulta == null) {
                 Barco barcoGuardado = barcoRepository.save(barco);
-                return new ResponseEntity<>(new RespuestaDTO("Exitoso",
+                return new ResponseEntity<>(new RespuestaDTO(Constants.SUCCESSFUL,
                         barcoGuardado, null), HttpStatus.OK);
             } else {
-                return new ResponseEntity<>(new RespuestaDTO("Error",
-                        null, "Ya existe un barco con ese número de casillas"),
+                return new ResponseEntity<>(new RespuestaDTO(Constants.ERROR,
+                        null, Constants.ERROR_DUPLICATE_BOX),
                         HttpStatus.CONFLICT);
             }
         } catch (Exception ex) {
-            return new ResponseEntity<>(new RespuestaDTO("Error",
-                    null, "Ocurrió un error almacenando el Barco"),
+            return new ResponseEntity<>(new RespuestaDTO(Constants.ERROR,
+                    null, Constants.ERROR_PERSISTENCE_SAVE),
                     HttpStatus.CONFLICT);
         }
     }
@@ -48,35 +49,41 @@ public class BarcoService {
         if(barcoRepository.existsById(id))
         {
             barcoRepository.deleteById(id);
-            return new ResponseEntity<>(new RespuestaDTO("Exitoso",
-                    "Barco eliminado satisfactoriamente", null), HttpStatus.OK);
+            return new ResponseEntity<>(new RespuestaDTO(Constants.SUCCESSFUL,
+                    Constants.MESSAGE_SUCCESSFUL, null), HttpStatus.OK);
         }
-        return new ResponseEntity<>(new RespuestaDTO("Error",
-                null, "Error al eliminar el barco"),
+        return new ResponseEntity<>(new RespuestaDTO(Constants.ERROR,
+                null, Constants.ERROR_PERSISTENCE_DELETE),
                 HttpStatus.CONFLICT);
     }
 
     public ResponseEntity<Object> updateBarco(Barco barco) {
 
-        if (barcoRepository.existsById(barco.getId())) {
-            try {
-                Barco barcoGuardado = barcoRepository.save(barco);
-                return new ResponseEntity<>(new RespuestaDTO("Exitoso",
-                        "Barco almacenado satisfactoriamente", null), HttpStatus.OK);
+        Barco barcoConsulta = barcoRepository.encontrarBarcoPorNumeroCasillas(barco.getNumeroCasillas());
+        if (barcoConsulta == null) {
+            if (barcoRepository.existsById(barco.getId())) {
+                try {
+                    Barco barcoGuardado = barcoRepository.save(barco);
+                    return new ResponseEntity<>(new RespuestaDTO(Constants.SUCCESSFUL,
+                            barcoGuardado, null), HttpStatus.OK);
+                } catch (Exception ex) {
+                    return new ResponseEntity<>(new RespuestaDTO(Constants.ERROR_PERSISTENCE_SAVE,
+                            null, Constants.ERROR_PERSISTENCE_SAVE),
+                            HttpStatus.UNAUTHORIZED);
                 }
-                catch(Exception ex) {
-                    return new ResponseEntity<>(new RespuestaDTO("Error",
-                            null, "Ocurrió un error almacenando el Barco"),
+            } else {
+                return new ResponseEntity<>(new RespuestaDTO(Constants.ERROR_PERSISTENCE_SAVE,
+                        null, Constants.MESSAGE_ROWS_COLS_POSITIVE),
+                        HttpStatus.CONFLICT);
+            }
+        }
+            else
+                {
+                    return new ResponseEntity<>(new RespuestaDTO(Constants.ERROR,
+                            null, Constants.ERROR_DUPLICATE_BOX),
                             HttpStatus.CONFLICT);
                 }
-
         }
-        else {
-            return new ResponseEntity<>(new RespuestaDTO("Error",
-                    null, "Las datos ingresados no son correctos"),
-                    HttpStatus.CONFLICT);
-        }
-    }
 }
 
 
