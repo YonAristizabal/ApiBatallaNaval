@@ -1,27 +1,27 @@
 package com.umanizales.apibatallanaval.controller;
 
-
-import com.umanizales.apibatallanaval.model.entities.Juego;
-import com.umanizales.apibatallanaval.service.JuegoService;
+import com.umanizales.apibatallanaval.model.entities.Tablero;
+import com.umanizales.apibatallanaval.service.TableroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path = "/juegos/{idJuego}/tableros")
+@RequestMapping(path = "/juegos/{juegoId}/tableros")
+//@RequestMapping(path = "/tableros")
 @Validated
 public class TableroController {
-    private JuegoService juegoService;
+    private TableroService tableroService;
 
     @Autowired
-    public TableroController(JuegoService juegoService) {
-        this.juegoService = juegoService;
+    public TableroController(TableroService tableroService) {
+        this.tableroService = tableroService;
     }
+
     @PostMapping
-    public @ResponseBody
-    ResponseEntity<Object> create(@PathVariable("idJuego") long idJuego,@RequestBody Juego juego){
-        System.out.println(idJuego);
-        return juegoService.create(juego);
+    public @ResponseBody ResponseEntity<Object> create(@PathVariable("juegoId") int juegoId,@RequestBody Tablero tablero){
+        tablero.setJuegoId(juegoId);
+        return tableroService.create(tablero);
     }
 }

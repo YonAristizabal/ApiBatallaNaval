@@ -1,5 +1,3 @@
-
-
 package com.umanizales.apibatallanaval.service;
 
 import com.umanizales.apibatallanaval.model.dto.RespuestaDTO;

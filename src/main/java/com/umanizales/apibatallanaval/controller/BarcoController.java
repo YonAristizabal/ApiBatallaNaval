@@ -30,4 +30,18 @@ public class BarcoController {
     public @ResponseBody ResponseEntity<Object> create(@RequestBody Barco barco){
         return barcoService.create(barco);
     }
+
+    @PutMapping(path = "/{id}")
+    public @ResponseBody ResponseEntity<Object> updateBarco(@PathVariable("id") int id,@RequestBody Barco barco)
+    {
+        barco.setId(id);
+        return barcoService.updateBarco(barco);
+    }
+
+    @DeleteMapping(path="/{id}")
+    public @ResponseBody ResponseEntity<Object> deleteBarco(@PathVariable("id") int id)
+    {
+        return barcoService.deleteBarcoById(id);
+    }
+
 }
