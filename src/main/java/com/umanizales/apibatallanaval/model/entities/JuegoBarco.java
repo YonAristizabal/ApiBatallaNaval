@@ -20,12 +20,15 @@ public class JuegoBarco {
     public void setId(int id) {
         this.id = id;
     }
-    public int getCantidadBarcos(){
-        return this.cantidadBarcos;
+
+    public int getCantidadBarcos() {
+        return cantidadBarcos;
     }
-    public void setCantidadBarcos(int cantidadBarcos){
+
+    public void setCantidadBarcos(int cantidadBarcos) {
         this.cantidadBarcos = cantidadBarcos;
     }
+
     @Column(name = "juego_id", nullable = true)
     public int getJuegoId() {
         return this.juegoId;
@@ -33,6 +36,7 @@ public class JuegoBarco {
     public void setJuegoId(int juegoId){
         this.juegoId = juegoId;
     }
+
     @Column(name = "barco_id", nullable = true)
     public int getTipoBarco() {
         return this.tipoBarco;

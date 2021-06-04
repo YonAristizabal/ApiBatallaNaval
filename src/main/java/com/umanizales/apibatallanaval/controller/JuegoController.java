@@ -16,7 +16,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path = "juegos")
+@RequestMapping(path = "juego")
 @Validated
 //Clase para controlar el barco
 public class JuegoController {
@@ -27,14 +27,15 @@ public class JuegoController {
         this.juegoService = juegoService;
     }
 
-    /**
+
     @GetMapping
     public @ResponseBody
     ResponseEntity<Object> findAll() {
-        UsuarioRepository usuarioRepository=new U
+       /** UsuarioRepository usuarioRepository=juegoService.
         return new ResponseEntity<>(new RespuestaDTO("Exitoso",
-                usuarioRepository.obtenerUsuariosPorRol(codeRol),null), HttpStatus.OK);
-    }*/
+                usuarioRepository.obtenerUsuariosPorRol(codeRol),null), HttpStatus.OK);*/
+       return null;
+    }
 
     @PostMapping
     public @ResponseBody ResponseEntity<Object> create(@RequestBody Juego juego){

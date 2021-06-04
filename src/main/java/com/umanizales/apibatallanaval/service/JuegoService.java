@@ -27,16 +27,6 @@ public class JuegoService {
     }
     public ResponseEntity<Object> create(Juego juego)
     {
-        /**int cantidadBarcos = JUegoBarco.getCantidadBarcos();
-        for(int i=i<cantiudadBarcos;i++){
-            JuegoBarco juegoBarcoTmp = New JuegoBarco();
-            juegoBarcoTmp.setJuegoId(juegoBarco.getJuegoId());
-            juegoBarcoTmp.setTipoBarco(juegoBarco.getTipoBarco());
-            juegoBarcoRepository.save(juegoBarcoTmp);
-        }
-
-
-         */
         try
         {
             Usuario usuario = this.usuarioRepository.obtenerUsuariosPorCorreoRol(juego.getCreadoPor(), TipoUsuario.TIPO_ADMINISTRADOR);
