@@ -62,4 +62,11 @@ public class Tablero {
             this.cols=30;
         }
     }
+    public boolean sePuedeColocarBarco(int x,int y, short numeroCasillas,String orientacion){
+        if(orientacion == JuegoBarcoTablero.ORIENTACION_HORIZONTAL){
+            return (x+numeroCasillas)<=this.cols;
+        }else{
+            return (y+numeroCasillas)<=this.filas;
+        }
+    }
 }

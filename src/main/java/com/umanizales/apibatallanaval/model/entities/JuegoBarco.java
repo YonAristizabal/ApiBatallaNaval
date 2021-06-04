@@ -6,7 +6,6 @@ import javax.persistence.*;
 @Table(name = "juego_barco", schema = "public", catalog = "batalla_naval")
 public class JuegoBarco {
     private int id;
-    @Transient
     private int cantidadBarcos;
     private int tipoBarco;
     private int juegoId;
@@ -20,11 +19,11 @@ public class JuegoBarco {
     public void setId(int id) {
         this.id = id;
     }
-
+    @Transient
     public int getCantidadBarcos() {
         return cantidadBarcos;
     }
-
+    @Transient
     public void setCantidadBarcos(int cantidadBarcos) {
         this.cantidadBarcos = cantidadBarcos;
     }

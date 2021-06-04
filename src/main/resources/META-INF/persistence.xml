@@ -10,6 +10,8 @@
         <class>com.umanizales.apibatallanaval.model.entities.Tablero</class>
         <class>com.umanizales.apibatallanaval.model.entities.Juego</class>
         <class>com.umanizales.apibatallanaval.model.entities.JuegoBarco</class>
+        <class>com.umanizales.apibatallanaval.model.entities.JuegoBarcoTablero</class>
+        <class>com.umanizales.apibatallanaval.model.entities.JuegoBarcoTableroCoordenada</class>
 
         <properties>
             <property name="javax.persistence.schema-generation.database.action" value="create"/>
