@@ -8,6 +8,7 @@ public final class Constants {
     public static final String MESSAGE_SUCCESSFUL="Operación efectuada con éxito";
     public static final String ERROR_PERSISTENCE_SAVE="Ha ocurrido un error al intentar guardar en base de datos";
     public static final String ERROR_PERSISTENCE_DELETE="Ha ocurrido un error al intentar eliminar en base de datos";
+    public static final String ERROR_EXIST ="El barco ya existe en el tablero";
 
 
     public static final String ERROR_DUPLICATE_BOX=" Ya existe un barco con ese número de casillas";

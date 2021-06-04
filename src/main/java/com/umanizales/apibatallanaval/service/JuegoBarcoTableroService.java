@@ -30,35 +30,42 @@ public class JuegoBarcoTableroService {
 
 
     public ResponseEntity<Object> asociarBarcoTablero(JuegoBarcoTablero juegoBarcoTablero, JuegoBarcoTableroCoordenada juegoBarcoTableroCoordenada) {
-        JuegoBarco juegoBarco = this.juegoBarcoRepository.getJuegoBarcoPorId(juegoBarcoTablero.getJuegoBarcoId());
-        Barco barco = this.barcoRepository.getBarcoById(juegoBarco.getTipoBarco());
-        Tablero tablero = this.tableroRepository.getTableroPorId(juegoBarcoTablero.getTableroId());
-        if(tablero.sePuedeColocarBarco(juegoBarcoTableroCoordenada.getX(), juegoBarcoTableroCoordenada.getY(), barco.getNumeroCasillas(),juegoBarcoTablero.getOrientacion())){
-            boolean sePuedeInsertar = true;
-            List<JuegoBarcoTableroCoordenada> juegoBartcoTableroCoordenadas = juegoBarcoTableroCoordenada.construirCoordenadas(barco.getNumeroCasillas(),juegoBarcoTablero.getOrientacion());
-            for(JuegoBarcoTableroCoordenada juegoBarcoTableroCoordenada1:juegoBartcoTableroCoordenadas){
-                JuegoBarcoTableroCoordenada juegoBarcoTableroCoordenadaTmp = juegoBarcoTableroCoordenadaRepository.getJuegoBarcoTableroCoordenaPorTableroCoordenadas(juegoBarcoTablero.getTableroId(),juegoBarcoTableroCoordenada1.getX(), juegoBarcoTableroCoordenada1.getY());
-                if(juegoBarcoTableroCoordenadaTmp!=null){
-                    sePuedeInsertar = false;
-                    break;
+        JuegoBarcoTablero juegoBarcoTablero1= this.juegoBarcoTableroRepository.getJuegoBarcoTableroPorTableroJuegoBarco(juegoBarcoTablero.getTableroId(),juegoBarcoTablero.getJuegoBarcoId());
+        if (juegoBarcoTablero1 == null) {
+            JuegoBarco juegoBarco = this.juegoBarcoRepository.getJuegoBarcoPorId(juegoBarcoTablero.getJuegoBarcoId());
+            Barco barco = this.barcoRepository.getBarcoById(juegoBarco.getTipoBarco());
+            Tablero tablero = this.tableroRepository.getTableroPorId(juegoBarcoTablero.getTableroId());
+            if (tablero.sePuedeColocarBarco(juegoBarcoTableroCoordenada.getX(), juegoBarcoTableroCoordenada.getY(), barco.getNumeroCasillas(), juegoBarcoTablero.getOrientacion())) {
+                boolean sePuedeInsertar = true;
+                List<JuegoBarcoTableroCoordenada> juegoBarcoTableroCoordenadas = juegoBarcoTableroCoordenada.construirCoordenadas(barco.getNumeroCasillas(), juegoBarcoTablero.getOrientacion());
+                for (JuegoBarcoTableroCoordenada juegoBarcoTableroCoordenada1 : juegoBarcoTableroCoordenadas) {
+                    JuegoBarcoTableroCoordenada juegoBarcoTableroCoordenadaTmp = juegoBarcoTableroCoordenadaRepository.getJuegoBarcoTableroCoordenaPorTableroCoordenadas(juegoBarcoTablero.getTableroId(), juegoBarcoTableroCoordenada1.getX(), juegoBarcoTableroCoordenada1.getY());
+                    if (juegoBarcoTableroCoordenadaTmp != null) {
+                        sePuedeInsertar = false;
+                        break;
+                    }
                 }
-            }
-            if(sePuedeInsertar){
-                juegoBarcoTableroRepository.save(juegoBarcoTablero);
-                for(JuegoBarcoTableroCoordenada juegoBarcoTableroCoordenada1:juegoBartcoTableroCoordenadas){
-                    juegoBarcoTableroCoordenada1.setJuegoBarcoTablero(juegoBarcoTablero);
-                    juegoBarcoTableroCoordenadaRepository.save(juegoBarcoTableroCoordenada1);
+                if (sePuedeInsertar) {
+                    juegoBarcoTableroRepository.save(juegoBarcoTablero);
+                    for (JuegoBarcoTableroCoordenada juegoBarcoTableroCoordenada1 : juegoBarcoTableroCoordenadas) {
+                        juegoBarcoTableroCoordenada1.setJuegoBarcoTablero(juegoBarcoTablero);
+                        juegoBarcoTableroCoordenadaRepository.save(juegoBarcoTableroCoordenada1);
+                    }
+                    return new ResponseEntity<>(new RespuestaDTO(Constants.SUCCESSFUL,
+                            Constants.MESSAGE_SUCCESSFUL, null), HttpStatus.OK);
+                } else {
+                    return new ResponseEntity<>(new RespuestaDTO(Constants.ERROR,
+                            null, "El barco no se puede insertar en el tablero,las coordenas ya estan ocupadas"),
+                            HttpStatus.CONFLICT);
                 }
-                return new ResponseEntity<>(new RespuestaDTO(Constants.SUCCESSFUL,
-                        Constants.MESSAGE_SUCCESSFUL, null), HttpStatus.OK);
-            }else{
+            } else {
                 return new ResponseEntity<>(new RespuestaDTO(Constants.ERROR,
-                        null, Constants.ERROR),
+                        null, "Las coordenas suministradas exceden el tamaño del tablero"),
                         HttpStatus.CONFLICT);
             }
-        }else{
+        } else {
             return new ResponseEntity<>(new RespuestaDTO(Constants.ERROR,
-                    null, Constants.ERROR),
+                    null, Constants.ERROR_EXIST),
                     HttpStatus.CONFLICT);
         }
     }

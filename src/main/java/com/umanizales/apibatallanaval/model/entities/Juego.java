@@ -30,4 +30,5 @@ public class Juego {
     public void setCreadoPor(int creadoPor){
         this.creadoPor = creadoPor;
     }
+
 }
