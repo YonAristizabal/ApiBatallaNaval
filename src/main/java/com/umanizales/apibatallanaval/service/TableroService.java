@@ -62,5 +62,4 @@ public class TableroService {
                 new RespuestaDTO(Constants.SUCCESSFUL,null,null),HttpStatus.CREATED
         );
     }
-
 }

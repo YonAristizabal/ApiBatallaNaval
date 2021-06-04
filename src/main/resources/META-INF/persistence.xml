@@ -9,9 +9,10 @@
         <class>com.umanizales.apibatallanaval.model.entities.Barco</class>
         <class>com.umanizales.apibatallanaval.model.entities.Tablero</class>
         <class>com.umanizales.apibatallanaval.model.entities.Juego</class>
+        <class>com.umanizales.apibatallanaval.model.entities.JuegoBarco</class>
 
         <properties>
-            <property name="javax.persistence.schema-generation.database.action" value="none"/>
+            <property name="javax.persistence.schema-generation.database.action" value="create"/>
         </properties>
     </persistence-unit>
 </persistence>

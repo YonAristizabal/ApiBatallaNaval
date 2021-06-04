@@ -49,4 +49,16 @@ public class Tablero {
     public void setFilas(int filas) {
         this.filas = filas;
     }
+    public void calcularFilasColumnasDesdeBarcos(int cantidadBarcos){
+        if(cantidadBarcos<=9){
+            this.filas = 10;
+            this.cols = 10;
+        }else if(cantidadBarcos>=10 && cantidadBarcos<=20){
+            this.filas=20;
+            this.cols =20;
+        }else{
+            this.filas=30;
+            this.cols=30;
+        }
+    }
 }

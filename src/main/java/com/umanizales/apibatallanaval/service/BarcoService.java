@@ -27,8 +27,8 @@ public class BarcoService {
     public ResponseEntity<Object> create(Barco barco) {
         try {
             //Consultar si ya existe un barco con ese número de casilla
-            Barco barcoConsulta = barcoRepository.encontrarBarcoPorNumeroCasillas(barco.getNumeroCasillas());
-            if (barcoConsulta == null) {
+            int cantidadBarcos= barcoRepository.encontrarBarcoPorNumeroCasillas(-1,barco.getNumeroCasillas());
+            if (cantidadBarcos == 0) {
                 Barco barcoGuardado = barcoRepository.save(barco);
                 return new ResponseEntity<>(new RespuestaDTO(Constants.SUCCESSFUL,
                         barcoGuardado, null), HttpStatus.OK);
@@ -59,8 +59,8 @@ public class BarcoService {
 
     public ResponseEntity<Object> updateBarco(Barco barco) {
 
-        Barco barcoConsulta = barcoRepository.encontrarBarcoPorNumeroCasillas(barco.getNumeroCasillas());
-        if (barcoConsulta == null) {
+        int cantidadBarcos = barcoRepository.encontrarBarcoPorNumeroCasillas(barco.getId(),barco.getNumeroCasillas());
+        if (cantidadBarcos == 0) {
             if (barcoRepository.existsById(barco.getId())) {
                 try {
                     Barco barcoGuardado = barcoRepository.save(barco);

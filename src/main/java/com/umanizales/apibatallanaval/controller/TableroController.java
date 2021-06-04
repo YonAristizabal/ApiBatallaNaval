@@ -30,6 +30,4 @@ public class TableroController {
     {
         return tableroService.inicializarTablero(tablero.getFilas(), tablero.getCols());
     }
-
-
 }
